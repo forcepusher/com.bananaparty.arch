@@ -11,12 +11,12 @@ namespace BananaParty.Registry
         private bool _neverUnload = false;
 
         private readonly List<T> _entries = new();
-        private readonly HashSet<T> _entriesHashSet = new();
+        private readonly Dictionary<T, int> _entriesLookup = new();
 
         private void OnEnable()
         {
             _entries.Clear();
-            _entriesHashSet.Clear();
+            _entriesLookup.Clear();
 
             if (_neverUnload)
                 hideFlags |= HideFlags.DontUnloadUnusedAsset;
@@ -29,7 +29,7 @@ namespace BananaParty.Registry
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
 
-            if (_entriesHashSet.Add(entry))
+            if (_entriesLookup.TryAdd(entry, _entries.Count))
                 _entries.Add(entry);
             else
                 throw new InvalidOperationException($"Attempt to {nameof(AddEntry)} {nameof(T)} that already exists in {nameof(ListRegistry<T>)}.");
@@ -40,15 +40,19 @@ namespace BananaParty.Registry
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
 
-            if (_entriesHashSet.Remove(entry))
-                _entries.Remove(entry);
+            if (_entriesHashSet.Remove(entry, out var index))
+            {
+                _entries[index] = _entries[^1];
+                _entriesLookup[_entries[^1]] = index;
+                _entries.RemoveAt(_entries.Count - 1);
+            }
             else
                 throw new InvalidOperationException($"Attempt to {nameof(RemoveEntry)} {nameof(T)} that doesn't exist in {nameof(ListRegistry<T>)}.");
         }
 
-        public ReadOnlyCollection<T> GetAllEntries()
+        public List<T> GetAllEntries()
         {
-            return _entries.AsReadOnly();
+            return _entries;
         }
     }
 }
