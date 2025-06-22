@@ -14,7 +14,8 @@ See minimum required Unity version in the `package.json` file.
 2. Embraces Unity's architecture instead of replacing it.  
 	- Fighting the engine design only makes things worse.  
 3. Fan-out event design.  
-	- Read events as they arrive without inverting the control flow. Behavior Tree compatible and way less spaghetti.  
+	- Read events as they arrive without inverting the control flow.  
+ 	- Behavior Tree compatible and way less spaghetti.  
   
 ### How to use:  
 1. Create YourClassRegistry class inheriting ObjectRegistry\<YourClass\> with CreateAssetMenu attribute. Create the SO asset.  
