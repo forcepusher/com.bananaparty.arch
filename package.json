@@ -1,0 +1,9 @@
+{
+  "name": "com.bananaparty.registry",
+  "version": "1.0.0",
+  "type": "library",
+  "displayName": "Registry",
+  "unity": "2021.3",
+  "description": "Alternative to ugly DI Containers and Singletons.",
+  "author": "github.com/forcepusher"
+}
