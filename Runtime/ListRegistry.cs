@@ -40,14 +40,16 @@ namespace BananaParty.Registry
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
 
-            if (_entriesHashSet.Remove(entry, out var index))
+            if (_entriesLookup.Remove(entry, out int index))
             {
                 _entries[index] = _entries[^1];
                 _entriesLookup[_entries[^1]] = index;
                 _entries.RemoveAt(_entries.Count - 1);
             }
             else
+            {
                 throw new InvalidOperationException($"Attempt to {nameof(RemoveEntry)} {nameof(T)} that doesn't exist in {nameof(ListRegistry<T>)}.");
+            }
         }
 
         public List<T> GetAllEntries()
