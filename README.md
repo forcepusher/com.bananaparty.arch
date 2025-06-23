@@ -22,7 +22,14 @@ See minimum required Unity version in the `package.json` file.
 	- This is basically your container for just one reference. It also works with Interfaces.  
 2. Create YourClassEntry script inheriting ObjectEntry\<YourClass\>. Put this script into a GameObject containing YourClass.  
 	- This script is going to populate the Registry you created with a reference.  
+	- Alternatively, you can populate the Registry yourself without this helper script.  
 3. Add YourClassRegistry inspector reference field in any script and gather the reference via GetEntry method.  
    	- No more buggy static Singleton instances (however this package supports and endorses it, except the static part).  
    	- No more laggy DI Container framework bloatware.  
 	- No more slow FindObjectOfType or FindObjectOfTypeAll.
+  
+### TL;DR:  
+1. This package is essentially about putting the references you need into a ScriptableObject and use them across the project.  
+	- ScriptableObjects are not statics, it's just an asset reference.  
+ 	- You can create multiple instances of same type and it's prefectly usable in integration tests.  
+  	- Again, Interfaces are fully supported for creating test mocks.
