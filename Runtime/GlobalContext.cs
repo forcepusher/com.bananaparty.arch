@@ -11,7 +11,7 @@ namespace BananaParty.Registry
         internal GameObject _prefab;
 
         [SerializeField]
-        private RuntimeInitializeLoadType _instantiationTime = RuntimeInitializeLoadType.BeforeSceneLoad;
+        private RuntimeInitializeLoadType _instantiationTime = RuntimeInitializeLoadType.SubsystemRegistration;
 
         private static void InstantiatePrefabIfMatchLoadType(RuntimeInitializeLoadType loadType)
         {
