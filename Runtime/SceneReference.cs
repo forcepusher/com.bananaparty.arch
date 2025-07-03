@@ -33,9 +33,9 @@ namespace BananaParty.Registry
             if (sceneAsset != null)
             {
                 string fullPath = AssetDatabase.GetAssetPath(sceneAsset);
-                string prefix = "Assets/";
-                string suffix = ".unity";
-                scenePathProperty.stringValue = fullPath.Substring(prefix.Length, fullPath.Length - prefix.Length - suffix.Length);
+                const string prefixToRemove = "Assets/";
+                const string suffixToRemove = ".unity";
+                scenePathProperty.stringValue = fullPath.Substring(prefixToRemove.Length, fullPath.Length - prefixToRemove.Length - suffixToRemove.Length);
             }
 
             EditorGUI.PropertyField(position, property, label, true);
