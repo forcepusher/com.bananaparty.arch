@@ -12,10 +12,9 @@ See minimum required Unity version in the `package.json` file.
   
 ### Cheatsheet:  
 Coming soon, still working on it.  
-1. Need a "GlobalContextContainer"?
-    - Use sdgsdfghadfhgdf.
-2. Need to use a MessagePipe event?
-	- Use asfasfasdfsdgsdg.
+1. Need a "GlobalContext Container"? Use the "GlobalContext" scriptable object.  
+    - Put a prefab you need inside it.  
+2. Need to use a "MessagePipe Event"? Use the "EventStreamAsset" scriptable object.  
 	- Fan-out event design to prevent spaghetti because of control flow inversion.  
 	- Initially made for Behavior Trees as a clean way to react on incoming events.  
   
