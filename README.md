@@ -1,7 +1,8 @@
 # com.bananaparty.registry  
   
-Unity package. Replacement for Singletons, DI Containers, and EventBus.  
+Unity package. Tiny and robust replacement for Singletons, DI Containers, and EventBus.  
 This package is essentially about using ScriptableObject as a runtime reference container.  
+Embraces Unity's architecture instead of replacing it. Fighting the engine always backfires.  
   
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
@@ -11,14 +12,12 @@ See minimum required Unity version in the `package.json` file.
   
 ### Cheatsheet:  
 Coming soon, still working on it.  
-  
-### Key notes:  
-1. Tiny replacement for Zenject/VContainer, and MessagePipe.  
-	- No overhead what so ever. Seven small scripts.  
-2. Embraces Unity's architecture instead of replacing it.  
-	- Fighting the engine design only makes things worse.  
-3. Fan-out event design.  
- 	- Behavior Tree compatible and way less spaghetti since no control flow inversion.  
+1. Need a "GlobalContextContainer"?
+    - Use sdgsdfghadfhgdf.
+2. Need to use a MessagePipe event?
+	- Use asfasfasdfsdgsdg.
+	- Fan-out event design to prevent spaghetti because of control flow inversion.  
+	- Initially made for Behavior Trees as a clean way to react on incoming events.  
   
 ### How to use:  
 1. Create YourClassRegistry class inheriting ObjectRegistry\<YourClass\> with CreateAssetMenu attribute. Create the SO asset.  
@@ -30,6 +29,5 @@ Coming soon, still working on it.
    	- Done! It didn't have to be as bloated as an entire framework, right?  
   
 ### Common Misconceptions:  
-- ScriptableObjects are not statics, it's just an asset reference.  
-- You can create multiple instances of same type and it's prefectly usable in integration tests.  
-- Again, Interfaces are fully supported for creating test mocks.
+- ScriptableObjects are not statics, it's an asset reference. You can create multiple instances of same type.  
+- Interfaces are fully supported for creating test mocks for integration/unit tests. Made with trunk-based development in mind.
