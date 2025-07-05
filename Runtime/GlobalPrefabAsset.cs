@@ -75,7 +75,7 @@ namespace BananaParty.Arch.Editor
 #pragma warning restore IDE0065 // Misplaced using directive
 
     [CustomEditor(typeof(GlobalPrefabAsset))]
-    public class GlobalContextEditor : Editor
+    public class GlobalPrefabAssetEditor : Editor
     {
         public override void OnInspectorGUI()
         {
