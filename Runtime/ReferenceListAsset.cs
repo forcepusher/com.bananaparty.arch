@@ -9,8 +9,11 @@ namespace BananaParty.Arch
         [SerializeField]
         private bool _neverUnload = false;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0032:Use auto property", Justification = "Reserved for changes and consistency")]
         private readonly List<T> _entries = new();
         private readonly Dictionary<T, int> _entriesIndexLookupTable = new();
+
+        public List<T> Values => _entries;
 
         private void OnEnable()
         {
@@ -23,7 +26,7 @@ namespace BananaParty.Arch
                 hideFlags &= ~HideFlags.DontUnloadUnusedAsset;
         }
 
-        private void Register(T entry)
+        public void Add(T entry)
         {
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
@@ -31,10 +34,10 @@ namespace BananaParty.Arch
             if (_entriesIndexLookupTable.TryAdd(entry, _entries.Count))
                 _entries.Add(entry);
             else
-                throw new InvalidOperationException($"Attempt to {nameof(Register)} {nameof(T)} that already exists in {nameof(ReferenceListAsset<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Add)} {typeof(T).Name} that already exists in {GetType().Name}.");
         }
 
-        private void Unregister(T entry)
+        public void Remove(T entry)
         {
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
@@ -54,29 +57,8 @@ namespace BananaParty.Arch
             }
             else
             {
-                throw new InvalidOperationException($"Attempt to {nameof(Unregister)} {nameof(T)} that doesn't exist in {nameof(ReferenceListAsset<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Remove)} {typeof(T).Name} that doesn't exist in {GetType().Name}.");
             }
-        }
-
-        public override void Register(object entry)
-        {
-            if (entry is T typedEntry)
-                Register(typedEntry);
-            else
-                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
-        }
-
-        public override void Unregister(object entry)
-        {
-            if (entry is T typedEntry)
-                Unregister(typedEntry);
-            else
-                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
-        }
-
-        public List<T> GetAllEntries()
-        {
-            return _entries;
         }
     }
 }

@@ -10,6 +10,17 @@ namespace BananaParty.Arch
 
         private T _entry = null;
 
+        public T Value
+        {
+            get
+            {
+                if (_entry == null)
+                    throw new InvalidOperationException($"Attempt to get {typeof(T).Name} when it's not set in {GetType().Name}.");
+
+                return _entry;
+            }
+        }
+
         private void OnEnable()
         {
             _entry = null;
@@ -20,47 +31,23 @@ namespace BananaParty.Arch
                 hideFlags &= ~HideFlags.DontUnloadUnusedAsset;
         }
 
-        private void Register(T entry)
+        public void Set(T entry)
         {
             if (_entry != null)
-                throw new InvalidOperationException($"Attempt to {nameof(Register)} {nameof(T)} when it's already set in {nameof(ReferenceAsset<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Set)} {typeof(T).Name} when it's already set in {GetType().Name}.");
 
             _entry = entry;
         }
 
-        private void Unregister(T entry)
+        public void Release(T entry)
         {
             if (_entry == null)
-                throw new InvalidOperationException($"Attempt to {nameof(Unregister)} {nameof(T)} when it's not set in {nameof(ReferenceAsset<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Release)} {typeof(T).Name} when it's not set in {GetType().Name}.");
 
             if (_entry != entry)
-                throw new InvalidOperationException($"Attempt to {nameof(Unregister)} {nameof(T)} when it doesn't match the current one in {nameof(ReferenceAsset<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Release)} {typeof(T).Name} when it doesn't match the current one in {GetType().Name}.");
 
             _entry = null;
-        }
-
-        public override void Register(object entry)
-        {
-            if (entry is T typedEntry)
-                Register(typedEntry);
-            else
-                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
-        }
-
-        public override void Unregister(object entry)
-        {
-            if (entry is T typedEntry)
-                Unregister(typedEntry);
-            else
-                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
-        }
-
-        public T GetEntry()
-        {
-            if (_entry == null)
-                throw new InvalidOperationException($"Attempt to {nameof(GetEntry)} {nameof(T)} when it's not set in {nameof(ReferenceAsset<T>)}.");
-
-            return _entry;
         }
     }
 }

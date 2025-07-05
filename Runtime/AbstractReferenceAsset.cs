@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 
 namespace BananaParty.Arch
 {
-    [Serializable]
+    /// <summary>
+    /// It's a crutch for filtering other unrelated ScriptableObjects in the editor selection window.
+    /// </summary>
     public abstract class AbstractReferenceAsset : ScriptableObject
     {
-        public abstract void Register(object entry);
-        public abstract void Unregister(object entry);
     }
-} 
+}
