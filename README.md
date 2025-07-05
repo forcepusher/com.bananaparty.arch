@@ -1,4 +1,4 @@
-# com.bananaparty.registry  
+# com.bananaparty.arch  
   
 Unity package. Tiny and robust replacement for Singletons, DI Containers, and EventBus.  
 This package is essentially about using ScriptableObject as a runtime reference container.  
@@ -7,7 +7,7 @@ Embraces Unity's architecture instead of replacing it. Fighting the engine alway
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
 Click the "+" sign on top left corner -> "Add package from git URL..."  
-Paste this: `https://github.com/forcepusher/com.bananaparty.registry.git#1.0.0`  
+Paste this: `https://github.com/forcepusher/com.bananaparty.arch.git#1.0.0`  
 See minimum required Unity version in the `package.json` file.  
   
 ### Cheatsheet:  

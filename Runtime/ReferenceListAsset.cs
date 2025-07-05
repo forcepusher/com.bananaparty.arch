@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BananaParty.Registry
+namespace BananaParty.Arch
 {
-    public abstract class ListRegistry<T> : ScriptableObject where T : class
+    public abstract class ReferenceListAsset<T> : AbstractReferenceAsset where T : class
     {
         [SerializeField]
         private bool _neverUnload = false;
@@ -23,7 +23,7 @@ namespace BananaParty.Registry
                 hideFlags &= ~HideFlags.DontUnloadUnusedAsset;
         }
 
-        public void AddEntry(T entry)
+        private void Register(T entry)
         {
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
@@ -31,10 +31,10 @@ namespace BananaParty.Registry
             if (_entriesIndexLookupTable.TryAdd(entry, _entries.Count))
                 _entries.Add(entry);
             else
-                throw new InvalidOperationException($"Attempt to {nameof(AddEntry)} {nameof(T)} that already exists in {nameof(ListRegistry<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Register)} {nameof(T)} that already exists in {nameof(ReferenceListAsset<T>)}.");
         }
 
-        public void RemoveEntry(T entry)
+        private void Unregister(T entry)
         {
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
@@ -54,8 +54,24 @@ namespace BananaParty.Registry
             }
             else
             {
-                throw new InvalidOperationException($"Attempt to {nameof(RemoveEntry)} {nameof(T)} that doesn't exist in {nameof(ListRegistry<T>)}.");
+                throw new InvalidOperationException($"Attempt to {nameof(Unregister)} {nameof(T)} that doesn't exist in {nameof(ReferenceListAsset<T>)}.");
             }
+        }
+
+        public override void Register(object entry)
+        {
+            if (entry is T typedEntry)
+                Register(typedEntry);
+            else
+                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
+        }
+
+        public override void Unregister(object entry)
+        {
+            if (entry is T typedEntry)
+                Unregister(typedEntry);
+            else
+                throw new ArgumentException($"Entry must be of type {typeof(T).Name}", nameof(entry));
         }
 
         public List<T> GetAllEntries()

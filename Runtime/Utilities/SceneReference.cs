@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace BananaParty.Registry
+namespace BananaParty.Arch
 {
     [Serializable]
     public class SceneReference

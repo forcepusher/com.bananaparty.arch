@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 
-namespace BananaParty.Registry
+namespace BananaParty.Arch
 {
-    public class EventQueue<TArgument>
+    public class EventQueue<TEventPayload>
     {
-        private readonly Queue<TArgument> _eventQueue = new();
+        private readonly Queue<TEventPayload> _eventQueue = new();
 
         public bool HasUnreadEvents => _eventQueue.Count > 0;
 
-        public void AddEvent(TArgument eventArgument)
+        public void AddEvent(TEventPayload eventArgument)
         {
             _eventQueue.Enqueue(eventArgument);
         }
 
-        public TArgument Read()
+        public TEventPayload Read()
         {
             return _eventQueue.Dequeue();
         }

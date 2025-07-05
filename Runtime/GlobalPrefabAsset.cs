@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace BananaParty.Registry
+namespace BananaParty.Arch
 {
     [CreateAssetMenu(fileName = "GlobalContextAsset")]
-    public class GlobalContext : ScriptableObject
+    public class GlobalPrefabAsset : ScriptableObject
     {
-        private static GlobalContext[] s_instances;
+        private static GlobalPrefabAsset[] s_instances;
 
         [SerializeField]
         internal GameObject _prefab;
@@ -15,11 +15,11 @@ namespace BananaParty.Registry
 
         private static void InstantiatePrefabIfMatchLoadType(RuntimeInitializeLoadType loadType)
         {
-            foreach (GlobalContext instance in s_instances)
+            foreach (GlobalPrefabAsset instance in s_instances)
             {
                 if (instance._prefab == null)
                 {
-                    Debug.LogError($"{nameof(GlobalContext)} {instance.name} has no {nameof(_prefab)} assigned!", instance);
+                    Debug.LogError($"{nameof(GlobalPrefabAsset)} {instance.name} has no {nameof(_prefab)} assigned!", instance);
                     continue;
                 }
 
@@ -59,7 +59,7 @@ namespace BananaParty.Registry
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void SubsystemRegistration()
         {
-            s_instances = (GlobalContext[])Resources.FindObjectsOfTypeAll(typeof(GlobalContext));
+            s_instances = (GlobalPrefabAsset[])Resources.FindObjectsOfTypeAll(typeof(GlobalPrefabAsset));
 
             InstantiatePrefabIfMatchLoadType(RuntimeInitializeLoadType.SubsystemRegistration);
         }
@@ -67,21 +67,21 @@ namespace BananaParty.Registry
 }
 
 #if UNITY_EDITOR
-namespace BananaParty.Registry.Editor
+namespace BananaParty.Arch.Editor
 {
 #pragma warning disable IDE0065 // Misplaced using directive
     using UnityEditor;
     using UnityEngine;
 #pragma warning restore IDE0065 // Misplaced using directive
 
-    [CustomEditor(typeof(GlobalContext))]
+    [CustomEditor(typeof(GlobalPrefabAsset))]
     public class GlobalContextEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            var globalContext = (GlobalContext)target;
+            var globalContext = (GlobalPrefabAsset)target;
             Object[] preloadedAssets = PlayerSettings.GetPreloadedAssets();
             bool isInPreloaded = System.Array.IndexOf(preloadedAssets, globalContext) >= 0;
 

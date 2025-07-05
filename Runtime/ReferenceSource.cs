@@ -1,17 +1,16 @@
 using System;
 using UnityEngine;
 
-namespace BananaParty.Registry
+namespace BananaParty.Arch
 {
     [DefaultExecutionOrder(-110000)]
-    public abstract class ObjectEntry<T> : MonoBehaviour where T : class
+    public abstract class ReferenceSource<T> : MonoBehaviour where T : class
     {
         [SerializeField]
-        private ObjectRegistry<T> _objectRegistry;
+        private AbstractReferenceAsset _referenceAsset;
 
         private T _entryComponent;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0014:Invalid type for call to GetComponent", Justification = "Interface is actually a valid type for GetComponent")]
         private void Awake()
         {
             _entryComponent = GetComponent<T>();
@@ -21,12 +20,12 @@ namespace BananaParty.Registry
 
         private void OnEnable()
         {
-            _objectRegistry.SetEntry(_entryComponent);
+            _referenceAsset.Register(_entryComponent);
         }
 
         private void OnDisable()
         {
-            _objectRegistry.ReleaseEntry(_entryComponent);
+            _referenceAsset.Unregister(_entryComponent);
         }
     }
 }

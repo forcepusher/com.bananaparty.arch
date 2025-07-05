@@ -1,9 +1,9 @@
 {
-  "name": "com.bananaparty.registry",
+  "name": "com.bananaparty.arch",
   "version": "1.0.0",
   "type": "library",
-  "displayName": "Registry",
-  "unity": "2021.3",
-  "description": "Alternative to ugly DI Containers and Singletons.",
+  "displayName": "Arch",
+  "unity": "2022.3",
+  "description": "Architecture alternative to Singletons and DI Containers.",
   "author": "github.com/forcepusher"
 }
