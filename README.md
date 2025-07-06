@@ -1,9 +1,10 @@
 # com.bananaparty.arch  
   
 Unity package. Tiny and robust replacement for Singletons, DI Containers, and EventBus.  
-This package is essentially about using ScriptableObject as a runtime reference container.  
+This package uses ScriptableObjects as runtime reference holders to manage object references.  
 Embraces Unity's architecture instead of replacing it. Fighting the engine always backfires.  
   
+### Installation:  
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
 Click the "+" sign on top left corner -> "Add package from git URL..."  
@@ -11,22 +12,26 @@ Paste this: `https://github.com/forcepusher/com.bananaparty.arch.git#1.0.0`
 See minimum required Unity version in the `package.json` file.  
   
 ### Cheatsheet:  
-Coming soon, still working on it.  
-1. Need a "GlobalContext Container"? Use the "GlobalContext" scriptable object.  
-    - Put a prefab you need inside it.  
-2. Need to use a "MessagePipe Event"? Use the "EventStreamAsset" scriptable object.  
-	- Fan-out event design to prevent spaghetti because of control flow inversion.  
-	- Initially made for Behavior Trees as a clean way to react on incoming events.  
-  
-### How to use:  
-1. Create YourClassRegistry class inheriting ObjectRegistry\<YourClass\> with CreateAssetMenu attribute. Create the SO asset.  
-	- This is basically your container for just one reference. It also works with Interfaces.  
-2. Create YourClassEntry script inheriting ObjectEntry\<YourClass\>. Put this script into a GameObject containing YourClass.  
-	- This script is going to populate the Registry you created with a reference.  
-	- Alternatively, you can populate the Registry yourself without this helper script.  
-3. Add YourClassRegistry inspector reference field in any script and gather the reference via GetEntry method.  
-   	- Done! It didn't have to be as bloated as an entire framework, right?  
+1. Need "FindObjectOfType"? Use the ReferenceAsset.  
+	- First create a new class inheriting ReferenceAsset/<YourClass/> to create a ScriptableObject reference holder.  
+	- Then create a new class inheriting ReferenceSource/<YourClass/>, it's a script for populating the reference holder.  
+	- Drag and drop ReferenceSource script besides your component, create ReferenceAsset SO and put it in the script.  
+	- Create an Inspector reference to your ReferenceAsset from the MonoBehavior script that requires it.  
+2. Need "FindObjectOfTypeAll"? Use the ReferenceListAsset.  
+	- Follow the same steps as with FindObjectOfType, but use an ReferenceListAsset/<YourClass/>.  
+3. Need "SceneContext Container"? Use the ReferenceAsset.  
+	- Follow the same steps as with FindObjectOfType.  
+4. Need "GlobalContext Container"? Use the GlobalPrefabAsset.  
+    - Create the GlobalPrefabAsset SO and put a prefab with scripts and/or singletons you need inside it.  
+	- Then follow FindObjectOfType steps within a prefab.  
+5. Need to use a "MessagePipe Event"? Use the EventHubAsset.  
+	- Create a new class inheriting EventHubAsset/<YourEventPayloadClass/> to create an EventHub ScriptableObject.  
+	- Reference it in your MonoBehavior scripts just like you would with ReferenceAsset.  
+	- Subscribe to it to receive events in the EventQueue that Subscribe method returns.  
+	- Be aware that you have to invoke EventQueue reading yourself. This Fan-out event design is used to prevent control flow inversion spaghetti. Initially it was made for Behavior Trees as a clean way to react on incoming events.  
+	- If you want a classic event with inverted control flow; I don't wanna hear it, roll your own via ReferenceAsset.  
+6. Bonus: Use a SceneReference for drag-and-drop integration of the Unity Scene asset.  
   
 ### Common Misconceptions:  
-- ScriptableObjects are not statics, it's an asset reference. You can create multiple instances of same type.  
+- ScriptableObjects are not static; they are asset references. You can create multiple instances of the same type.  
 - Interfaces are fully supported for creating test mocks for integration/unit tests. Made with trunk-based development in mind.
