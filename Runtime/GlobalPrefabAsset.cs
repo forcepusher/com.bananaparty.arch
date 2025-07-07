@@ -1,3 +1,6 @@
+#if UNITY_EDITOR
+using System.Linq;
+#endif
 using UnityEngine;
 
 namespace BananaParty.Arch
@@ -59,7 +62,12 @@ namespace BananaParty.Arch
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void SubsystemRegistration()
         {
+#if UNITY_EDITOR
+            // Preloaded Assets are broken in the Editor, have to be preloaded manually.
+            s_instances = UnityEditor.PlayerSettings.GetPreloadedAssets().OfType<GlobalPrefabAsset>().ToArray();
+#else
             s_instances = (GlobalPrefabAsset[])Resources.FindObjectsOfTypeAll(typeof(GlobalPrefabAsset));
+#endif
 
             InstantiatePrefabIfMatchLoadType(RuntimeInitializeLoadType.SubsystemRegistration);
         }
