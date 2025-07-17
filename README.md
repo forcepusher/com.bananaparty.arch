@@ -11,9 +11,9 @@ Click the "+" sign on top left corner -> "Add package from git URL..."
 Paste this: `https://github.com/forcepusher/com.bananaparty.arch.git#1.0.0`  
 See minimum required Unity version in the `package.json` file.  
   
-Extended Manual  
-Russian: https://github.com/forcepusher/Obsidian/blob/master/Arch/com.bananaparty.arch.docs.ru.md  
-English (Auto Translate): https://github-com.translate.goog/forcepusher/Obsidian/blob/master/Arch/com.bananaparty.arch.docs.ru.md?_x_tr_sl=ru&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp  
+Extended Manual:  
+[Russian](https://github.com/forcepusher/Obsidian/blob/master/Arch/com.bananaparty.arch.docs.ru.md)  
+[English (Auto Translate)](https://github-com.translate.goog/forcepusher/Obsidian/blob/master/Arch/com.bananaparty.arch.docs.ru.md?_x_tr_sl=ru&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp)  
   
 ### Cheatsheet:  
 1. Need "FindObjectOfType"? Use the ReferenceAsset.  
