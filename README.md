@@ -27,7 +27,7 @@ See minimum required Unity version in the `package.json` file.
 	- Follow the same steps as with FindObjectOfType.  
 4. Need "GlobalContext Container"? Use the GlobalPrefabAsset.  
     - Create the GlobalPrefabAsset SO and put a prefab with scripts and/or singletons you need inside it.  
-	- Then follow FindObjectOfType steps within a prefab.  
+	- Then follow FindObjectOfType steps within a prefab to reference the global context.  
 5. Need to use a "MessagePipe Event"? Use the EventHubAsset.  
 	- Create a new class inheriting EventHubAsset\<YourEventPayloadClass\> to create an EventHub ScriptableObject.  
 	- Reference it in your MonoBehavior scripts just like you would with ReferenceAsset.  
