@@ -38,4 +38,4 @@ See minimum required Unity version in the `package.json` file.
   
 ### Common Misconceptions:  
 - ScriptableObjects are not static; they are asset references. You can create multiple instances of the same type.  
-- Interfaces are fully supported for creating test mocks for integration/unit tests. Made with trunk-based development in mind.
+- Interfaces are fully supported for creating Unit/Integration Test mocks. Just use \<IYourInterface\> instead of \<YourClass\>.
