@@ -31,8 +31,8 @@ See minimum required Unity version in the `package.json` file.
 5. Need to use a "MessagePipe Event"? Use the EventHubAsset.  
 	- Create a new class inheriting EventHubAsset\<YourEventPayloadClass\> to create an EventHub ScriptableObject.  
 	- Reference it in your MonoBehavior scripts just like you would with ReferenceAsset.  
-	- Subscribe to it to receive events in the EventQueue that Subscribe method returns.  
-	- Be aware that you have to invoke EventQueue reading yourself. This Fan-out event design is used to prevent control flow inversion spaghetti. Initially it was made for Behavior Trees as a clean way to react on incoming events.  
+	- Subscribe to it to receive events to the EventQueue the subscription returns.  
+	- Read EventQueue manually yourself in an Update. This Fan-out event design prevents control flow inversion spaghetti. This simplifies debugging and gives opportunity to use events in Behavior Trees and multuthreading.  
 	- If you want a classic event with inverted control flow; I don't wanna hear it, roll your own via ReferenceAsset.  
 6. Bonus: Use a SceneReference for drag-and-drop integration of the Unity Scene asset.  
   
