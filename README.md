@@ -32,7 +32,7 @@ See minimum required Unity version in the `package.json` file.
 	- Create a class inheriting EventHubAsset\<YourEventPayloadClass\> to create an EventHub ScriptableObject.  
 	- Reference it in your MonoBehavior scripts just like you would with ReferenceAsset.  
 	- Subscribe to it to receive events to the EventQueue the subscription returns.  
-	- Read EventQueue manually in an Update. This Fan-out event design prevents control flow inversion spaghetti. This simplifies debugging and gives opportunity to use events in Behavior Trees and multuthreading.  
+	- Read EventQueue manually in an Update. This [Fan-out design](https://en.wikipedia.org/wiki/Fan-out_(software)) prevents control flow inversion spaghetti. This simplifies debugging and gives opportunity to use events in Behavior Trees and multuthreading.  
 6. Bonus: Use a SceneReference for drag-and-drop integration of the Unity Scene asset.  
   
 ### Common Misconceptions:  
