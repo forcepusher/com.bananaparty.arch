@@ -28,12 +28,11 @@ See minimum required Unity version in the `package.json` file.
 4. Need "GlobalContext Container"? Use the GlobalPrefabAsset.  
     - Create the GlobalPrefabAsset SO and put a prefab with scripts and/or singletons you need inside it.  
 	- Then follow FindObjectOfType steps within a prefab to reference the global context.  
-5. Need to use a "MessagePipe Event"? Use the EventHubAsset.  
+5. Need to use a "MessagePipe Event" or want an "EventBus"? Use the EventHubAsset.  
 	- Create a new class inheriting EventHubAsset\<YourEventPayloadClass\> to create an EventHub ScriptableObject.  
 	- Reference it in your MonoBehavior scripts just like you would with ReferenceAsset.  
 	- Subscribe to it to receive events to the EventQueue the subscription returns.  
 	- Read EventQueue manually yourself in an Update. This Fan-out event design prevents control flow inversion spaghetti. This simplifies debugging and gives opportunity to use events in Behavior Trees and multuthreading.  
-	- If you want a classic event with inverted control flow; I don't wanna hear it, roll your own via ReferenceAsset.  
 6. Bonus: Use a SceneReference for drag-and-drop integration of the Unity Scene asset.  
   
 ### Common Misconceptions:  
