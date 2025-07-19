@@ -22,7 +22,7 @@ See minimum required Unity version in the `package.json` file.
 	- Drag and drop ReferenceSource script besides your component, create ReferenceAsset SO and put it in the script.  
 	- Create an Inspector reference to your ReferenceAsset from the MonoBehavior script that requires it.  
 2. Need "FindObjectOfTypeAll"? Use the ReferenceListAsset.  
-	- Follow the same steps as with FindObjectOfType, but use an ReferenceListAsset\<YourClass\>.  
+	- Follow the same steps as with FindObjectOfType, but use a ReferenceListAsset\<YourClass\>.  
 3. Need "SceneContext Container"? Use the ReferenceAsset.  
 	- Follow the same steps as with FindObjectOfType.  
 4. Need "GlobalContext Container"? Use the GlobalPrefabAsset.  
