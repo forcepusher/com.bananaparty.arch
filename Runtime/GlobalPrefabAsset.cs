@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BananaParty.Arch
 {
-    [CreateAssetMenu(fileName = "GlobalContextAsset")]
+    [CreateAssetMenu(fileName = "GlobalPrefabAsset")]
     public class GlobalPrefabAsset : ScriptableObject
     {
         private static GlobalPrefabAsset[] s_instances;
