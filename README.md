@@ -39,5 +39,5 @@ See minimum required Unity version in the `package.json` file.
 - ScriptableObjects are not static; they are asset references. You can create multiple instances of the same type.  
 - Interfaces are fully supported for creating Unit/Integration Test mocks. Just use \<IYourInterface\> instead of \<YourClass\>.
   
-## Development Repo and Sample Project:  
+### Development Repo and Sample Project:  
 See at https://github.com/forcepusher/BananaArchDevRepo/tree/master/Assets/Source
