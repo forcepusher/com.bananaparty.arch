@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BananaParty.Arch.TestingUtilities
+namespace BananaParty.Arch.TestUtilities
 {
     [CreateAssetMenu]
     public class StringListAsset : ScriptableObject

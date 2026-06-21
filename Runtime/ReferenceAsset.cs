@@ -10,6 +10,8 @@ namespace BananaParty.Arch
 
         private T _entry = null;
 
+        public bool IsSet { get; private set; } = false;
+
         public T Value
         {
             get
@@ -37,6 +39,8 @@ namespace BananaParty.Arch
                 throw new InvalidOperationException($"Attempt to {nameof(Set)} {typeof(T).Name} when it's already set in {GetType().Name}.");
 
             _entry = entry;
+
+            IsSet = true;
         }
 
         public void Release(T entry)
@@ -48,6 +52,13 @@ namespace BananaParty.Arch
                 throw new InvalidOperationException($"Attempt to {nameof(Release)} {typeof(T).Name} when it doesn't match the current one in {GetType().Name}.");
 
             _entry = null;
+
+            IsSet = false;
+        }
+
+        public void Release()
+        {
+            Release(_entry);
         }
     }
 }
