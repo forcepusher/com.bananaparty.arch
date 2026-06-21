@@ -38,7 +38,7 @@ To update the package, simply add it again using a different version tag.
   
 ### Common Misconceptions:  
 - ScriptableObjects are not static; they are asset references. You can create multiple instances of the same type.  
-- Interfaces are fully supported for creating Unit/Integration Test mocks. Just use \<IYourInterface\> instead of \<YourClass\>.
+- Interfaces are fully supported, so you can create replaceable services/components and Unit/Integration Test mocks. Just use \<IYourInterface\> instead of \<YourClass\>.  
   
 ### Development Repo and Sample Project:  
 See at https://github.com/forcepusher/BananaArchDevRepo/tree/master/Assets/Source
