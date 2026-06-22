@@ -27,6 +27,8 @@ namespace BananaParty.Arch
         {
             _entry = null;
 
+            IsSet = false;
+
             if (_neverUnload)
                 hideFlags |= HideFlags.DontUnloadUnusedAsset;
             else
