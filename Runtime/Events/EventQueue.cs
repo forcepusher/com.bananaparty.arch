@@ -8,7 +8,7 @@ namespace BananaParty.Arch
 
         public bool HasUnreadEvents => _eventQueue.Count > 0;
 
-        public void AddEvent(TEventPayload eventArgument)
+        public void Broadcast(TEventPayload eventArgument)
         {
             _eventQueue.Enqueue(eventArgument);
         }

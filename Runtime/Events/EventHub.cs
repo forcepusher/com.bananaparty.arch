@@ -7,10 +7,10 @@ namespace BananaParty.Arch
     {
         internal readonly List<EventQueue<TEventPayload>> _eventQueues = new();
 
-        public void AddEvent(TEventPayload eventArgument)
+        public void Broadcast(TEventPayload eventArgument)
         {
             foreach (EventQueue<TEventPayload> eventQueue in _eventQueues)
-                eventQueue.AddEvent(eventArgument);
+                eventQueue.Broadcast(eventArgument);
         }
 
         public EventQueue<TEventPayload> Subscribe()
